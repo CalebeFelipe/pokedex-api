@@ -10,10 +10,16 @@ const generateHTML = pokemons => pokemons.reduce((accumulator, { name, id, types
     const imageSrc = sprites.other.dream_world.front_default
 
     accumulator += `
-        <li class="card ${elementTypes[0]}">
-            <img class="card-image" alt="${name}" src="${imageSrc}" />
-            <h2 class="card-title">${id}. ${name}</h2>
-            <p class="card-subtitle">${elementTypes.join(' | ')}</p>
+        <li class="card">
+            <a href="https://pokemondb.net/pokedex/${name}">
+                <span class="card-id">${id}</span>
+                <img class="card-image" src="https://img.pokemondb.net/sprites/bank/normal/${name}.png" alt="${name}">
+                <div class="abilities">
+                    <span class="types ${elementTypes[0]}">${elementTypes[0]}</span>
+                    ${elementTypes[1] === undefined ? '' : `<span class="types ${elementTypes[1]}">${elementTypes[1]}</span>`}
+                </div>
+                <h5 class="card-title">${name}</h5>
+            </a>
         </li>`
 
     return accumulator
