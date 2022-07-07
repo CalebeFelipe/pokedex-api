@@ -13,7 +13,7 @@ const generateHTML = pokemons => pokemons.reduce((accumulator, { name, id, types
 
     accumulator += `
         <li class="card">
-            <a href="https://pokemondb.net/pokedex/${name}">
+            <a id="card" disabled href="file:///D:/Backup/Desktop/programação-calebe/Projetos_Portfólio/API/pokedex-master/info.html?nome=${name}" >
                 <span class="card-id">${id}</span>
                 <img class="card-image" src="https://img.pokemondb.net/sprites/bank/normal/${name}.png" alt="${name}">
                 <div class="abilities">
@@ -39,30 +39,27 @@ console.log(pokemonPromises)
 
 const filterType = () => {
     const type = searchType.value
+    
+    if(type != '') {
+        Promise.all(pokemonPromises)
+        .then(pokemons => pokemons.filter(item => {
+            const elementTypes = item.types.map(item => item.type.name)
 
-    Promise.all(pokemonPromises)
-    .then(pokemons => pokemons.filter(item => {
-        const elementTypes = item.types.map(item => item.type.name)
-
-        if (elementTypes[0] == type || elementTypes[1] == type) return true
-    }))
-    .then(generateHTML)
-    .then(insertPokemonIntoPage)
+            if (elementTypes[0] == type || elementTypes[1] == type) return true
+        }))
+        .then(generateHTML)
+        .then(insertPokemonIntoPage)
+    }
 }
 
-const getPokemonInfo = () => {
-    const namePokemon = searchName.value
-    
-    fetch(`${urlPokeApi}/${namePokemon}`)
-        .then(response => response.json())
-        .then(data => {
-            const elementTypes = data.types.map(item => item.type.name)
+const criarCard = data => {
+        const elementTypes = data.types.map(item => item.type.name)
 
             const cardInfo = `
             <li class="card">
                 <a href="https://pokemondb.net/pokedex/${data.name}">
                     <span class="card-id">${data.id}</span>
-                    <img class="card-image" src="https://img.pokemondb.net/sprites/bank/normal/${data.name}.png" alt="${data.name}">
+                    <img class="card-image" src="https://img.pokemondb.net/sprites/black-white/normal/${data.name}.png" alt="${data.name}">
                     <div class="abilities">
                         <span class="types ${elementTypes[0]}">${elementTypes[0]}</span>
                         ${elementTypes[1] === undefined ? '' : `<span class="types ${elementTypes[1]}">${elementTypes[1]}</span>`}
@@ -72,10 +69,26 @@ const getPokemonInfo = () => {
             </li>`
 
         return cardInfo
-        })
+}
+
+const getPokemonInfo = () => {
+    const namePokemon = searchName.value
+    
+    fetch(`${urlPokeApi}/${namePokemon}`)
+        .then(response => response.json())
+        .then(criarCard)
         .then(insertPokemonIntoPage)
 }
 
+const showCard = () => {
+    let paramsSearch = new URLSearchParams(window.location.search)
+    const namePokemon = paramsSearch.get('nome')
+
+    fetch(`${urlPokeApi}/${namePokemon}`)
+        .then(response => response.json())
+        .then(criarCard)
+        .then(insertPokemonIntoPage)
+}
 
 Promise.all(pokemonPromises)
     .then(generateHTML)

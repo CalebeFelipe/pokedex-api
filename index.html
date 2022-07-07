@@ -10,8 +10,27 @@
 
   <header>
     <h1>Pokedex</h1>
-    <input id="type" type="text" name="type">
-    <button type="button" onclick="filterType()">Pesquisar Tipo</button>
+    <select id="type" name="type" onchange="filterType()">
+      <option value='' selected>Selecione um tipo</option>
+      <option value='grass'>grass</option>
+      <option value='fire'>fire</option>
+      <option value='water'>water</option>
+      <option value='electric'>electric</option>
+      <option value='normal'>normal</option>
+      <option value='ice'>ice</option>
+      <option value='fighting'>fighting</option>
+      <option value='poison'>poison</option>
+      <option value='ground'>ground</option>
+      <option value='flying'>flying</option>
+      <option value='psychic'>psychic</option>
+      <option value='bug'>bug</option>
+      <option value='rock'>rock</option>
+      <option value='ghost'>ghost</option>
+      <option value='dragon'>dragon</option>
+      <option value='dark'>dark</option>
+      <option value='steel'>steel</option>
+      <option value='fairy'>fairy</option>
+    </select>
     <input id="name" type="text" name="type">
     <button type="button" onclick="getPokemonInfo()">Pesquisar Nome</button>
   </header>
