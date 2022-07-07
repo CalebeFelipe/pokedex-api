@@ -146,6 +146,10 @@ li {
 	background-color: #66b;
 }
 
+.dark {
+	background-color: #754;
+}
+
 @keyframes bounce {
 	20% {
 			transform: translateY(-6px);
