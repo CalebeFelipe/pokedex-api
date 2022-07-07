@@ -30,10 +30,12 @@
 
 ## ⚙️ Aprendizados
 
-- [ ] Consumir a API 
-- [ ] Usar o reduce
-- [ ] Utilizar as promises 
-- [ ] Listar os Pokémons
+- [x] Consumir a API 
+- [x] Usar o reduce
+- [x] Utilizar as promises 
+- [x] Listar os Pokémons
+- [x] Filtrar por tipo
+- [x] Filtrar por nome ou id
 
 
 ---
