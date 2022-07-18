@@ -13,7 +13,7 @@ const generateHTML = pokemons => pokemons.reduce((accumulator, { name, id, types
 
     accumulator += `
         <li class="card">
-            <a id="card" disabled href="file:///D:/Backup/Desktop/programação-calebe/Projetos_Portfólio/API/pokedex-master/info.html?nome=${name}" >
+            <a id="card" disabled href="./info.html?nome=${name}" >
                 <span class="card-id">${id}</span>
                 <img class="card-image" src="https://img.pokemondb.net/sprites/bank/normal/${name}.png" alt="${name}">
                 <div class="abilities">
@@ -37,9 +37,11 @@ const pokemonPromises = generatePokemonPromise()
 
 console.log(pokemonPromises)
 
-const filterType = () => {
-    const type = searchType.value
-    
+const filterType = info => {
+    const type = info
+    const inputVisor = document.querySelector('.textDropDown')
+    inputVisor.value = type
+
     if(type != '') {
         Promise.all(pokemonPromises)
         .then(pokemons => pokemons.filter(item => {
@@ -50,6 +52,8 @@ const filterType = () => {
         .then(generateHTML)
         .then(insertPokemonIntoPage)
     }
+
+    show()
 }
 
 const criarCard = data => {
@@ -89,6 +93,15 @@ const showCard = () => {
         .then(criarCard)
         .then(insertPokemonIntoPage)
 }
+
+const show = () => {
+    const containerArrow = document.querySelector('.containerDropDown')
+    const viewportDropDown = document.querySelector('.dropDown')
+
+    containerArrow.classList.toggle('active')
+    viewportDropDown.classList.toggle('show')
+}
+
 
 Promise.all(pokemonPromises)
     .then(generateHTML)
