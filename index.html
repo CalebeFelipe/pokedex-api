@@ -5,6 +5,7 @@
   <title>PokeDex</title>
   <link rel="stylesheet" href="./style.css" />
   <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
@@ -18,7 +19,6 @@
 
     <div class="containerDropDown">
       <input type="text" class="textDropDown" placeholder="Selecione um tipo" onclick="show()" readonly>
-
       <div class="dropDown">
         <ul class="listDropDown">
           <li class="itemDropDown" onclick="filterType('grass')">grass</li>
@@ -41,10 +41,15 @@
           <li class="itemDropDown" onclick="filterType('fairy')">fairy</li>
         </ul>
       </div>
-
     </div>
-    <input id="name" type="text" name="type">
-    <button type="button" onclick="getPokemonInfo()">Pesquisar Nome</button>
+
+    <div class="search-box">
+      <input class="search-text" id="name" type="text" name="type" placeholder="Digite o Nome ou Id">
+      <a href="#" class="search-btn" onclick="getPokemonInfo()">
+        <i class='bx bx-search'></i>
+      </a>
+    </div>
+    
   </section>
 
   <main class="container">
